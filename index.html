@@ -1,0 +1,4944 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PracticalHub</title>
+
+    <style>
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* BODY */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('');
+            color: white;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: -1;
+        }
+
+        /* HEADER */
+        header {
+            background: rgba(0, 0, 0, 0.7);
+            text-align: center;
+            padding: 20px;
+            animation: slideDown 1s ease;
+        }
+
+        /* NAV */
+        nav {
+            background:grey;
+            text-align: center;
+            padding: 10px;
+        }
+
+        nav a {
+            color: white;
+            margin: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #00ffff;
+            transform: scale(1.1);
+        }
+
+        /* SECTIONS */
+        .section {
+            display: none;
+            padding: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .active {
+            display: block;
+            animation: slideDown 0.5s ease;
+        }
+
+        /* CARD (Branches + Subsections) */
+        .card {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+
+            /* Grey transparent glass effect */
+            background: rgba(128, 128, 128, 0.2);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+
+            color: white;
+            animation: fadeIn 0.6s ease forwards;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            background: rgba(128, 128, 128, 0.35);
+        }
+
+        /* BUTTON */
+        .btn {
+            background: #3498db;
+            color: white;
+            padding: 8px 12px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 5px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+            background: #2980b9;
+        }
+
+        /* TEXT */
+        h1, h3, p {
+            color: white;
+        }
+        
+h2{
+color:black;
+text-align:centar;
+}
+h4{
+color:black;
+text-align:center;
+}
+
+#search {
+    display: block;
+    margin-left: 180px;
+    margin-top: 10px;
+    width: 200px;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+}
+ #cse{
+ background:url('https://aryans.edu.in/wp-content/uploads/2025/04/programming-background-collage_11zon-1024x768.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+
+ }
+   
+#entc{
+ background:url('https://thumbs.dreamstime.com/b/hand-holding-light-bulb-business-digital-marketing-innovation-technology-icons-network-hand-holding-light-bulb-business-138534565.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+
+ }
+ 
+ #mech{
+ background:url('https://img.freepik.com/premium-photo/abstract-background-with-gears-cogs-blue-shades-paper-blueprint-machine-technical-device-construction-concept-technical-drawing-mechanical-engineering-concept_1175634-7712.jpg?semt=ais_hybrid&w=740&q=80');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+
+ 
+ }
+ 
+ #civil{
+ background:url('https://www.narayanengineeracademy.com/img/banner4.jpg');
+      background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+
+ }
+ 
+ #quastion{
+ background:url('https://image.shutterstock.com/image-photo/notepad-text-any-question-on-260nw-2596696261.jpg');
+     background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+
+ }
+
+#home{
+background:url('https://thumbs.dreamstime.com/b/stem-education-science-technology-engineering-mathematics-concept-drawing-background-hand-pencil-writing-73647775.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+
+}
+        
+    </style>
+</head>
+
+<body>
+<script>
+function showSection(id) {
+    let sections = document.querySelectorAll(".section");
+    sections.forEach(sec => sec.style.display = "none");
+
+    let target = document.getElementById(id);
+    if (target) {
+        target.style.display = "block";
+    }
+}
+
+function searchFunction() {
+    let input = document.getElementById("search").value.toLowerCase().trim();
+
+    let sections = document.querySelectorAll(".section");
+    let found = false;
+
+    sections.forEach(sec => {
+        let text = sec.innerText.toLowerCase();
+
+        if (text.includes(input) && input !== "") {
+            sec.style.display = "block";
+            found = true;
+        } else {
+            sec.style.display = "none";
+        }
+    });
+
+    if (input !== "") {
+        sections.forEach(sec => {
+            if (sec.id.toLowerCase() === input) {
+                showSection(sec.id);
+                found = true;
+            }
+        });
+    }
+
+    if (input === "") {
+        sections.forEach(sec => sec.style.display = "none");
+        document.getElementById("home").style.display = "block";
+    }
+}
+</script>
+</body>
+
+
+<header>
+<h1>All MANUAL ANS OF MSBTE</h1>
+</header>
+<input type="text" id="search" onkeyup="searchFunction()" placeholder="Search...">
+<nav>
+<a onclick="showSection('home')">HOME</a>
+<a onclick="showSection('cse')">CSE</a>
+<a onclick="showSection('mech')">MECH</a>
+<a onclick="showSection('civil')">CIVIL</a>
+<a onclick="showSection('entc')">ENTC</a>
+<a onclick="showSection('contact')">Contact</a>
+</nav>
+
+<!-- HOME -->
+<div id="home" class="section active"> <!-- ADDED active -->
+  <div class="card">
+    <h3>SELECT YOUR BRANCH !</h3>
+    </div>
+<a onclick="showSection('cse')" class="btn">COMPUTER SCIENCE ENGINEERING</a></br>
+<a onclick="showSection('mech')"class="btn">MECHANICAL ENGINEERING</a></br>
+<a onclick="showSection('civil')"class="btn">Civil ENGINEERING</a></br>
+<a onclick="showSection('entc')"class="btn">ELECTRONICS & TELICOMMUNICATION</a></br>
+<a onclick="showSection('quastion')"class="btn">QUASTION PEPARS</a></br>
+
+<p> </p><br>
+<p> </p><br>
+<p> </p><br>
+<p> </p><br>
+<p> </p><br>
+<p> </p><br>
+<p> </p><br>
+<p> </p><br>
+<p> </p><br>
+</div>
+
+<!-- CSE -->
+<div id="cse" class="section">
+<center><h2>DIPARTMENT OF COMPUTER</h2></center>
+<div class="card" onclick="showSection('syllabus')">SYLLABUS</div>
+<div class="card" onclick="showSection('manual')">MANUALS ANS</div>
+<div class="card" onclick="showSection('question')">QUESTION PEPARS</div>
+<div class="card" onclick="showSection('assi')">ASSIGNMENT</div>
+<div class="card" onclick="showSection('notes')">IMP NOTES</div>
+<div class="card" onclick="showSection('imp')">IMPORTANT POINTS</div>
+
+</div>
+<!--QUESTION -->
+<div id="question" class="section">
+<h2>SELECT YOUR  SEMISTERS </h2>
+
+<div class="card" onclick="showSection('c-q-sem1')">SEM 1</div>
+<div class="card" onclick="showSection('c-q-sem2')">SEM 2</div>
+<div class="card" onclick="showSection('c-q-sem3')">SEM 3</div>
+<div class="card" onclick="showSection('c-q-sem4')">SEM 4</div>
+<div class="card" onclick="showSection('c-q-sem5')">SEM 5</div>
+<div class="card" onclick="showSection('c-q-sem6')">SEM 6</div>
+
+</div>
+<!-- CSE QUESTION  QSEM 1 -->
+<div id="c-q-sem1" class="section">
+<h2>SEM-1</h2></br>
+<h4>SELECT YOUR SUBJECT</h4>
+
+<div class="card subject" onclick="showSection('q-bms')">BMS</div>
+<div class="card subject" onclick="showSection('q-bco')">BCO</div>
+
+</div>
+
+
+ 
+<!--BMS  QUESTION -->
+<div id="q-bms" class="section">
+<h2></h2> 
+
+<div class="card">
+<h3>BMS QUESTION PEPAR 2021</h3>
+<a href="" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>BMS QUESTION PEPAR 2022</h3>
+<a href="" class="btn">Open PDF</a>
+</div>
+
+<div class="card">
+<h3>BMS QUESTION PEPAR 2023</h3>
+<a href="" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>BMS QUESTION PEPAR 2024</h3>
+<a href="" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>BMS QUESTION PEPAR 2025</h3>
+<a href="" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>BMS QUESTION PEPAR 2026</h3>
+<a href="" class="btn">Open PDF</a>
+</div>
+
+</div>
+<!--COMMUNICATION  QUESTION PEPAR -->
+<div id="q-bco" class="section">
+<h2></h2> 
+
+<div class="card">
+<h3>COMMUNICATION QUESTION PEPAR 2021</h3>
+<a href="" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>COMMUNICATION QUESTION PEPAR 2022</h3>
+<a href="" class="btn">Open PDF</a>
+</div>
+
+<div class="card">
+<h3>COMMUNICATION QUESTION PEPAR 2023</h3>
+<a href="" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>COMMUNICATION QUESTION PEPAR 2024</h3>
+<a href="" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>COMMUNICATION QUESTION PEPAR 2025</h3>
+<a href="" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3><h3> QUESTION PEPAR 2026</h3>
+ QUESTION PEPAR 2026</h3>
+<a href="" class="btn">Open PDF</a>
+</div>
+
+</div>
+
+
+<!--SYLLABUS -->
+<div id="syllabus" class="section">
+<h2>CSE ALL SEMISTERS </h2>
+
+<div class="card" onclick="showSection('c-s-sem1')">SEM 1</div>
+<div class="card" onclick="showSection('c-s-sem2')">SEM 2</div>
+<div class="card" onclick="showSection('c-s-sem3')">SEM 3</div>
+<div class="card" onclick="showSection('c-s-sem4')">SEM 4</div>
+<div class="card" onclick="showSection('c-s-sem5')">SEM 5</div>
+<div class="card" onclick="showSection('c-s-sem6')">SEM 6</div>
+
+</div>
+<!-- SCE SYLLABIS SEM 1 -->
+<div id="c-s-sem1" class="section">
+<h2>SEM-1</h2></br>
+<h4>SELECT YOUR SUBJECT</h4>
+
+<div class="card subject" onclick="showSection('s-bms')">BMS</div>
+<div class="card subject" onclick="showSection('s-bch')">BCH</div>
+<div class="card subject" onclick="showSection('s-bph')">BPH</div>
+<div class="card subject" onclick="showSection('s-bco')">BCO</div>
+<div class="card subject" onclick="showSection('s-ict')">ICT</div>
+<div class="card subject" onclick="showSection('s-wpc')">WORKSHOP</div>
+
+</div>
+
+
+
+
+ <!--BMS  SYLLABUS -->
+<div id="s-bms" class="section">
+<h2></h2> 
+
+<div class="card">
+<h3>BMS SULLABUS</h3>
+<a href="" class="btn">Open PDF</a>
+</div>
+</div>
+
+<!--BCH  SYLLABUS -->
+<div id="s-bch" class="section">
+<h2></h2> 
+
+<div class="card">
+<h3>BCH SULLABUS</h3>
+<a href="" class="btn">Open PDF</a>
+</div></div>
+
+
+
+
+ <!--BCO  SYLLABUS -->
+<div id="s-bco" class="section">
+<h2></h2> 
+<div class="card">
+<h3>BCO SULLABUS</h3>
+<a href="" class="btn">Open PDF</a>
+</div>
+</div>
+
+<!-- ICT SYLLABUS -->
+<div id="s-ict" class="section">
+<h2></h2> 
+
+<div class="card">
+<h3>ICT SULLABUS</h3>
+<a href="" class="btn">Open PDF</a>
+</div></div> 
+<!--WORKSHOP SYLLABUS -->
+<div id="s-wpc" class="section">
+
+
+<div class="card">
+<h3>WORKSHOP SULLABUS</h3>
+<a href="" class="btn">Open PDF</a>
+</div></div>
+
+
+<!--SULLABUS SEM 2 -->
+<div id="c-s-sem2" class="section">
+<h2>SEM 2</h2></br>
+<h4>SELECT YOUR SUBJECT</h4>
+
+<div class="card" onclick="showSection('s-wpd')">WPD</div>
+<div class="card" onclick="showSection('s-pic')">PIC</div>
+<div class="card" onclick="showSection('s-linux')">linux</div>
+<div class="card" onclick="showSection('s-bee')">BEE</div>
+<div class="card" onclick="showSection('s-ams')">AMS</div>
+<div class="card" onclick="showSection('s-pco')">PCO</div>
+<div class="card" onclick="showSection('s-sfc')">SFC</div>
+
+  
+</div>
+
+
+<!-- CSE SYLLABUS SEM 3 -->
+<div id="c-s-sem3" class="section">
+<h2>SEM 3</h2></br>
+<h2>SELECT YOUR SUBJECT</h2>
+
+
+<div class="card" onclick="showSection('s-dbms')">DBMS</div>
+<div class="card" onclick="showSection('s-oop')">OOP</div>
+<div class="card" onclick="showSection('s-dt')">DT</div>
+<div class="card" onclick="showSection('s-dsu')">DSU</div>
+<div class="card" onclick="showSection('s-cgr')">CGR</div>
+</div>
+
+<!-- CSE SYLLABUS  SEM 4 -->
+<div id="c-s-sem4" class="section">
+<h2>SEM 4</h2></br>
+<h4>SELECT YOUR SUBJECT</h4>
+
+
+<div class="card" onclick="showSection('s-java')">JAVA</div>
+<div class="card" onclick="showSection('s-mic')">MIC</div>
+<div class="card" onclick="showSection('s-dcm')">DCM</div>
+<div class="card" onclick="showSection('s-eec')">EEC</div>
+<div class="card" onclick="showSection('s-paython')">PAYTHON</div>
+<div class="card" onclick="showSection('s-ui-ux')">UI-UX</div>
+</div>
+
+<!-- CSE SYLLABUS SEM 5 -->
+<div id="c-s-sem5" class="section">
+<h2>SEM 5</h2></br>
+<h4>SELECT YOUR SUBJECT</h4>
+
+<div class="card" onclick="showSection('s-ste')">STE</div>
+<div class="card" onclick="showSection('s-acn')">ACN</div>
+<div class="card" onclick="showSection('s-osy')">OSY</div>
+</div>
+
+<!-- CSE SYLLABUS SEM 6 -->
+<div id="c-s-sem6" class="section">
+<h2>SEM 6</h2></br>
+<h4>SELECT YOUR SUBJECT</h4>
+
+
+<div class="card" onclick="showSection('css')">CSS</div>
+<div class="card" onclick="showSection('nis')">NIS</div>
+<div class="card" onclick="showSection('mad')">MAD</div>
+<div class="card" onclick="showSection('sft')">SFT</div>
+</div>
+
+
+
+
+
+
+
+
+<!-- MANUAL -->
+<div id="manual" class="section">
+<h2>CSE ALL SEMISTERS</h2>
+
+<div class="card" onclick="showSection('sem1')">SEM 1</div>
+<div class="card" onclick="showSection('sem2')">SEM 2</div>
+<div class="card" onclick="showSection('sem3')">SEM 3</div>
+<div class="card" onclick="showSection('sem4')">SEM 4</div>
+<div class="card" onclick="showSection('sem5')">SEM 5</div>
+<div class="card" onclick="showSection('sem6')">SEM 6</div>
+
+</div>
+
+
+
+<!-- CSE SEM 1 -->
+<div id="sem1" class="section">
+<h2>SEM-1</h2></br>
+<h2>CSE All Subjects</h2>
+
+<div class="card subject" onclick="showSection('bms')">BMS</div>
+<div class="card subject" onclick="showSection('bch')">BCH</div>
+<div class="card subject" onclick="showSection('bph')">BPH</div>
+<div class="card subject" onclick="showSection('bco')">BCO</div>
+<div class="card subject" onclick="showSection('ict')">ICT</div>
+<div class="card subject" onclick="showSection('wpc')">WORKSHOP</div>
+
+</div>
+
+ <!--BMS  PRACTICALS -->
+<div id="bms" class="section">
+<h2>BMS MANUAL</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= "https://drive.google.com/file/d/1q47HfBXPUNNdobu_qF5LJ6DxSj40Od8Q/view?usp=sharing"class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+
+</div>
+ <!-- BCH PRACTICALS -->
+<div id="bch" class="section">
+<h2>BCH Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+
+</div>
+ 
+  <!-- BPH PRACTICALS -->
+<div id="bph" class="section">
+<h2>BPH Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+
+</div>
+ 
+ <!-- BCO PRACTICALS -->
+<div id="bco" class="section">
+<h2>BCO Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+
+</div>
+ 
+  <!-- ICT PRACTICALS -->
+<div id="ict" class="section">
+<h2>ICT Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+
+</div>
+ <!-- WPC PRACTICALS -->
+<div id="wpc" class="section">
+<h2>WORKSHOP Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+
+</div>
+
+
+<!-- CSE SEM 2 -->
+<div id="sem2" class="section">
+<h2>SEM 2</h2></br>
+<h2>CSE All Subjects</h2>
+
+<div class="card" onclick="showSection('wpd')">WPD</div>
+<div class="card" onclick="showSection('pic')">PIC</div>
+<div class="card" onclick="showSection('linux')">linux</div>
+<div class="card" onclick="showSection('bee')">BEE</div>
+<div class="card" onclick="showSection('ams')">AMS</div>
+<div class="card" onclick="showSection('pco')">PCO</div>
+<div class="card" onclick="showSection('sfc')">SFC</div>
+
+  
+</div>
+
+<!-- WPD PRACTICALS -->
+<div id="wpd" class="section">
+<h2>WPD Practicals</h2>
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= "https://drive.google.com/file/d/1iQixMW_Xuokggrpo14nBnddRppoe0ioN/view?usp=sharing"  class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href="https://drive.google.com/file/d/1RhN2N64tAOW-v9CjV9q6pqcvWvJRFv_3/view?usp=sharing"  class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href="https://drive.google.com/file/d/1lAb-OAUPU9q-uwZ74BxJJuT9mfmhUKOs/view?usp=sharing"  class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= "https://drive.google.com/file/d/1q47HfBXPUNNdobu_qF5LJ6DxSj40Od8Q/view?usp=sharing" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href="https://drive.google.com/file/d/1iQf-je6P9NZmvuKB9-pcDS7PNPqThk0C/view?usp=sharing"  class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href="https://drive.google.com/file/d/1iEABRp8zPBvvlKCtfM-BPQdQTilGGC8A/view?usp=sharing"  class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href="https://drive.google.com/file/d/1c-Nj5h6_w7xheDMafvNfcR-ZbKisTdTa/view?usp=sharing" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href="https://drive.google.com/file/d/1lNTyKQDk9VHc3J_4y_j6-kw7YcJW0UWz/view?usp=sharing"  class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href="https://drive.google.com/file/d/1hqS25M3Pg8Pn5CMzLnY-L26-6m5JDypd/view?usp=sharing"  class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href="https://drive.google.com/file/d/1vbSrLF2r49wWv5yKVJ2jxBjS12PrZUan/view?usp=sharing"  class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 11</h3>
+<a href="https://drive.google.com/file/d/1VVkZ6WGF5t-yH_7LNFwc0WgAMSdRAy8u/view?usp=sharing"  class="btn">Open PDF</a>
+</div><div class="card">
+<h3>practical no 12</h3>
+<a href="https://drive.google.com/file/d/1wZD4xbTFj_cc0cKvIyRwN2uliFvgpKfb/view?usp=sharing"  class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= "https://drive.google.com/file/d/1dk0PbqvQRGigBKGFaGHjhcz1HlGIBuwm/view?usp=sharing" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href="https://drive.google.com/file/d/18enz9PhSp6JfKM-EyuyROEmY0fZfyaTx/view?usp=sharing"  class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 15</h3>
+<a href="https://drive.google.com/file/d/1vx4ZaIeZLklMFs-VmVEp4eNDgOEYjhph/view?usp=sharing"  class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href="https://drive.google.com/drive/folders/1YdfDQfW3J9uaHOcTHe8sXS9rOlBk0tvw?usp=sharing"  class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 17</h3>
+<a href= "https://drive.google.com/file/d/1ehce7vExgjCmCVTN4nAuNk38NhA1_bhP/view?usp=sharing" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= "https://drive.google.com/file/d/18J_XOCaerhYx39n21PmhPfXVMCU2ghfG/view?usp=sharing" class="btn">Open PDF</a>
+
+
+</div>
+<div class="card">
+<h3>practical no 19</h3>
+<a href="https://drive.google.com/file/d/1HYWUW_61TSBa6L4R2NXgsmDZLxwqL3YI/view?usp=sharing"  class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href="https://drive.google.com/file/d/1nrEcXBUmKCPAN9PGAekD2gk_x4AxrnpH/view?usp=sharing"  class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 21</h3>
+<a href="https://drive.google.com/file/d/1LCRkX9krLZErIucGL-har1fkTBmEJ1Gb/view?usp=sharing"  class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 23</h3>
+<a href= "https://drive.google.com/file/d/1UJZscn-Bz_8KhZnRGNlF0ute4b2bjrdp/view?usp=sharing" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 24</h3>
+<a href="https://drive.google.com/file/d/1djDGYmS_S63DdXFizlid15gcsiLLTp5A/view?usp=sharing"  class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 25</h3>
+<a href="https://drive.google.com/file/d/1Fhtoo-zV6-2FV1xq5XcwaCxI_OE2ZFQu/view?usp=sharing"  class="btn">Open PDF</a>
+</div>
+
+</div>
+
+
+<!-- PIC PRACTICALS -->
+<div id="pic" class="section">
+<h2>PIC Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href="https://drive.google.com/file/d/1iP-5ZNt2MPByGp5WglhQmuqnzKRKf50c/view?usp=sharing"  class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= "https://drive.google.com/file/d/1hm37s2q-x-InwJjDhwp5D0Kw5LCbl1hC/view?usp=sharing" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= "https://drive.google.com/file/d/1CU_klkHh4Ii0LZbVaGXZSJN9JlCchhaU/view?usp=sharing" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= "https://drive.google.com/file/d/1sA4sMwQ-IFzszUpvM3Xim95Ehl0UML6P/view?usp=sharing" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= "https://drive.google.com/file/d/1ca_DmMpaa7HPxr673in4mM-rJ761iKyN/view?usp=sharing" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= "https://drive.google.com/file/d/1EkGwC_vDWEdEf8_1gxjHMXNgUbCZ2cSL/view?usp=sharing" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= "https://drive.google.com/file/d/1KlnIxgxcPW4F4K-8cc3QDS3NAW6klA3b/view?usp=sharing" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= "https://drive.google.com/file/d/1ItMt9TCeEdGhw5YLboYrknOL39OX5JLq/view?usp=sharing" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= "https://drive.google.com/file/d/1O_EZ9zwHTB2DLFYtUGk-aS0GRiTGQvLX/view?usp=sharing" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= "https://drive.google.com/file/d/13cyYz0ZTGAaphevNp8E7nPUIkxiWj7aB/view?usp=sharing" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 11</h3>
+<a href= "https://drive.google.com/file/d/15i1j-mWfM5X9b7VK6NhYQq6gflyjf4z_/view?usp=sharing" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= "https://drive.google.com/file/d/1MjohHdFFOCC22RaVm7y9-Chkb26KELKZ/view?usp=sharing" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= "https://drive.google.com/file/d/17jH6tOJBWKmIwrMdcILCdRkaOdSdDzQu/view?usp=sharing" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= "" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 15</h3>
+<a href= "https://drive.google.com/file/d/1BLQJf3iJuC6HdwsDFiG2L87qO6gXK8j0/view?usp=sharing" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= "https://drive.google.com/file/d/1XfmXtSKWcjjXpDONaCxorEGO601Vwqdd/view?usp=sharing" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 17</h3>
+<a href= "https://drive.google.com/file/d/1Au5wsomQp0MNYpMpE2MxC07yqgvIuy6Z/view?usp=sharing" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= "https://drive.google.com/file/d/1A47Im3E5t7Yxx4JKCz97QB8ZsaY5NKZd/view?usp=sharing" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 19</h3>
+<a href= "" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= " not write" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 21</h3>
+<a href= " not write" class="btn">Open PDF</a>
+</div>
+<div class="card"> 
+<h3>practical no 22</h3>
+<a href= "https://drive.google.com/file/d/1Z92Kx65DfUaq3Nr9zCYfD9T4QS9SS1T6/view?usp=sharing" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 23</h3>
+<a href= "" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 24</h3>
+<a href= "https://drive.google.com/file/d/1Ic_pzei7cWl3DiAwBL_d4-9kbX7FHjn-/view?usp=sharing" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 25</h3>
+<a href= "" class="btn">Open PDF</a>
+</div>
+
+</div>
+  <!-- linux PRACTICALS -->
+<div id="linux" class="section">
+<h2>Linux Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href="https://drive.google.com/file/d/1ruC2r1enx4TiXNt4VdC6Nw05HH3oVmQH/view?usp=sharing"  class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= "https://drive.google.com/file/d/1N3iM1pDQyI-1oIJU4Ehf6pcuICWi6qQt/view?usp=sharing" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href="https://drive.google.com/file/d/1fFuKVjgJ79lZnBZxAS6iWhI1aP6nZBTg/view?usp=sharing"  class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href="https://drive.google.com/file/d/11UX_yT38EeKssXLRziDJT3w9zT7aTuDE/view?usp=sharing" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= "https://drive.google.com/file/d/12LuEZhqIrE31s53YlM9oH3B_76fzpwgM/view?usp=sharing" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= "https://drive.google.com/file/d/1CUhVopmVxsxMrY-r4BQITwGTXytCX_7u/view?usp=sharing" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= "https://drive.google.com/file/d/1oJ2tvDjBY8Xpq4885YVey-eNkkPELf5W/view?usp=sharing" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href="https://drive.google.com/file/d/1lNTyKQDk9VHc3J_4y_j6-kw7YcJW0UWz/view?usp=sharing" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href="https://drive.google.com/file/d/13cPeqXz6KxHAAmMajdoxdIZFfbqnoOE3/view?usp=sharing"  class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href=""  class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 11</h3>
+<a href=""  class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href=""  class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href=""  class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href=""  class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 15</h3>
+<a href=""  class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href=""  class="btn">Open PDF</a>
+</div>
+
+
+</div>
+
+  <!-- BEE PRACTICALS -->
+<div id="bee" class="section">
+<h2>BEE Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+
+</div>
+<!-- AMS PRACTICALS -->
+<div id="ams" class="section">
+<h2>AMS Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+
+<!-- PCO PRACTICALS -->
+<div id="pco" class="section">
+<h2>PCO Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+
+<!-- SFC PRACTICALS -->
+<div id="sfc" class="section">
+<h2>SFC Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+
+
+<!-- CSE SEM 3 -->
+<div id="sem3" class="section">
+<h2>SEM 3</h2></br>
+<h2>CSE All Subjects</h2>
+
+
+<div class="card" onclick="showSection('dbms')">DBMS</div>
+<div class="card" onclick="showSection('oop')">OOP</div>
+<div class="card" onclick="showSection('dt')">DT</div>
+<div class="card" onclick="showSection('dsu')">DSU</div>
+<div class="card" onclick="showSection('cgr')">CGR</div>
+</div>
+
+ <!-- OOP PRACTICALS -->
+<div id="oop" class="section">
+<h2>OOP Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+  
+   <!-- DT PRACTICALS -->
+<div id="dt" class="section">
+<h2>DT Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+  
+   <!-- DBMS PRACTICALS -->
+<div id="dbms" class="section">
+<h2>DBMS Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+ 
+ 
+ <!-- DSU PRACTICALS -->
+<div id="dsu" class="section">
+<h2>DSU Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+  
+   <!-- CGR PRACTICALS -->
+<div id="cgr" class="section">
+<h2>CGR Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+  
+  <!-- CSE SEM 4 -->
+<div id="sem4" class="section">
+<h2>SEM 4</h2></br>
+<h2>CSE All Subjects</h2>
+
+
+<div class="card" onclick="showSection('java')">JAVA</div>
+<div class="card" onclick="showSection('mic')">MIC</div>
+<div class="card" onclick="showSection('dcm')">DCM</div>
+<div class="card" onclick="showSection('eec')">EEC</div>
+<div class="card" onclick="showSection('paython')">PAYTHON</div>
+<div class="card" onclick="showSection('ui-ux')">UI-UX</div>
+</div>
+
+ <!-- JAVA PRACTICALS -->
+<div id="java" class="section">
+<h2>JAVA Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+  
+   <!--PAYTHON  PRACTICALS -->
+<div id="paython" class="section">
+<h2>PAYTHON Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+  
+   <!-- MIC PRACTICALS -->
+<div id="mic" class="section">
+<h2>MIC Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+ 
+ 
+ <!-- DCN PRACTICALS -->
+<div id="dcn" class="section">
+<h2>DCN Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+  
+   <!-- EES PRACTICALS -->
+<div id="ees" class="section">
+<h2>EES Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+  
+   <!-- UI-UX PRACTICALS -->
+<div id="ui-ux" class="section">
+<h2>UI-UX Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+<!-- CSE SEM 5 -->
+<div id="sem5" class="section">
+<h2>SEM 5</h2></br>
+<h2>CSE All Subjects</h2>
+
+
+<div class="card" onclick="showSection('ste')">STE</div>
+<div class="card" onclick="showSection('acn')">ACN</div>
+<div class="card" onclick="showSection('osy')">OSY</div>
+
+
+</div>
+
+ <!-- STE PRACTICALS -->
+<div id="ste" class="section">
+<h2>STE Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+  
+   <!--ACN PRACTICALS -->
+<div id="acn" class="section">
+<h2>ACN Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+  
+   <!-- OSY PRACTICALS -->
+<div id="osy" class="section">
+<h2>OSY Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+<!-- CSE SEM 6 -->
+<div id="sem6" class="section">
+<h2>SEM 6</h2></br>
+<h2>CSE All Subjects</h2>
+
+
+<div class="card" onclick="showSection('css')">CSS</div>
+<div class="card" onclick="showSection('nis')">NIS</div>
+<div class="card" onclick="showSection('mad')">MAD</div>
+<div class="card" onclick="showSection('sft')">SFT</div>
+</div>
+
+ <!-- CCS PRACTICALS -->
+<div id="css" class="section">
+<h2>CSS Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+  
+   <!--NIS PRACTICALS -->
+<div id="nis" class="section">
+<h2>NIS Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+  
+   <!-- MAD PRACTICALS -->
+<div id="mad" class="section">
+<h2>MAD Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+ 
+ 
+ <!-- SFT PRACTICALS -->
+<div id="sft" class="section">
+<h2>SFT Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+  
+
+
+
+
+
+
+
+
+
+
+<!-- mech -->
+<div id="mech" class="section">
+<center><h2>DIPARTMENT OF MECH</h2></center>
+<div class="card" onclick="showSection('m-syllabus')">SYLLABUS</div>
+<div class="card" onclick="showSection('m-manual')">MANUALS ANS</div>
+<div class="card" onclick="showSection('m-question')">QUESTION PEPARS</div>
+<div class="card" onclick="showSection('m-assi')">ASSIGNMENT</div>
+<div class="card" onclick="showSection('m-notes')">IMP NOTES</div>
+<div class="card" onclick="showSection('m-imp')">IMPORTANT POINTS</div>
+
+</div>
+<!--QUESTION -->
+<div id="m-question" class="section">
+<h2>SELECT YOUR  SEMISTERS </h2>
+
+<div class="card" onclick="showSection('c-q-sem1')">SEM 1</div>
+<div class="card" onclick="showSection('m-q-sem2')">SEM 2</div>
+<div class="card" onclick="showSection('m-q-sem3')">SEM 3</div>
+<div class="card" onclick="showSection('m-q-sem4')">SEM 4</div>
+<div class="card" onclick="showSection('m-q-sem5')">SEM 5</div>
+<div class="card" onclick="showSection('m-q-sem6')">SEM 6</div>
+
+</div>
+<!-- CSE QUESTION  QSEM 1 -->
+<div id="c-q-sem1" class="section">
+<h2>SEM-1</h2></br>
+<h4>SELECT YOUR SUBJECT</h4>
+
+<div class="card subject" onclick="showSection('q-bms')">BMS</div>
+<div class="card subject" onclick="showSection('q-bco')">BCO</div>
+
+</div>
+
+
+ 
+<!--BMS  QUESTION -->
+<div id="q-bms" class="section">
+<h2></h2> 
+
+<div class="card">
+<h3>BMS QUESTION PEPAR 2021</h3>
+<a href="" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>BMS QUESTION PEPAR 2022</h3>
+<a href="" class="btn">Open PDF</a>
+</div>
+
+<div class="card">
+<h3>BMS QUESTION PEPAR 2023</h3>
+<a href="" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>BMS QUESTION PEPAR 2024</h3>
+<a href="" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>BMS QUESTION PEPAR 2025</h3>
+<a href="" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>BMS QUESTION PEPAR 2026</h3>
+<a href="" class="btn">Open PDF</a>
+</div>
+
+</div>
+<!--COMMUNICATION  QUESTION PEPAR -->
+<div id="q-bco" class="section">
+<h2></h2> 
+
+<div class="card">
+<h3>COMMUNICATION QUESTION PEPAR 2021</h3>
+<a href="" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>COMMUNICATION QUESTION PEPAR 2022</h3>
+<a href="" class="btn">Open PDF</a>
+</div>
+
+<div class="card">
+<h3>COMMUNICATION QUESTION PEPAR 2023</h3>
+<a href="" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>COMMUNICATION QUESTION PEPAR 2024</h3>
+<a href="" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>COMMUNICATION QUESTION PEPAR 2025</h3>
+<a href="" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3><h3> QUESTION PEPAR 2026</h3>
+ QUESTION PEPAR 2026</h3>
+<a href="" class="btn">Open PDF</a>
+</div>
+
+</div>
+
+
+
+<!--SYLLABUS -->
+<div id="m-syllabus" class="section">
+<h2>CSE ALL SEMISTERS </h2>
+
+<div class="card" onclick="showSection('c-s-sem1')">SEM 1</div>
+<div class="card" onclick="showSection('m-s-sem2')">SEM 2</div>
+<div class="card" onclick="showSection('m-s-sem3')">SEM 3</div>
+<div class="card" onclick="showSection('m-s-sem4')">SEM 4</div>
+<div class="card" onclick="showSection('m-s-sem5')">SEM 5</div>
+<div class="card" onclick="showSection('m-s-sem6')">SEM 6</div>
+
+</div>
+<!-- SCE SYLLABIS SEM 1 -->
+<div id="c-s-sem1" class="section">
+<h2>SEM-1</h2></br>
+<h4>SELECT YOUR SUBJECT</h4>
+
+<div class="card subject" onclick="showSection('s-bms')">BMS</div>
+<div class="card subject" onclick="showSection('s-bch')">BCH</div>
+<div class="card subject" onclick="showSection('s-bph')">BPH</div>
+<div class="card subject" onclick="showSection('s-bco')">BCO</div>
+<div class="card subject" onclick="showSection('s-ict')">ICT</div>
+<div class="card subject" onclick="showSection('s-wpc')">WORKSHOP</div>
+
+</div>
+
+
+
+
+ <!--BMS  SYLLABUS -->
+<div id="s-bms" class="section">
+<h2></h2> 
+
+<div class="card">
+<h3>BMS SULLABUS</h3>
+<a href="" class="btn">Open PDF</a>
+</div>
+</div>
+
+<!--BCH  SYLLABUS -->
+<div id="s-bch" class="section">
+<h2></h2> 
+
+<div class="card">
+<h3>BCH SULLABUS</h3>
+<a href="" class="btn">Open PDF</a>
+</div></div>
+
+
+
+
+ <!--BCO  SYLLABUS -->
+<div id="s-bco" class="section">
+<h2></h2> 
+<div class="card">
+<h3>BCO SULLABUS</h3>
+<a href="" class="btn">Open PDF</a>
+</div>
+</div>
+
+<!-- ICT SYLLABUS -->
+<div id="s-ict" class="section">
+<h2></h2> 
+
+<div class="card">
+<h3>ICT SULLABUS</h3>
+<a href="" class="btn">Open PDF</a>
+</div></div> 
+<!--WORKSHOP SYLLABUS -->
+<div id="s-wpc" class="section">
+
+
+<div class="card">
+<h3>WORKSHOP SULLABUS</h3>
+<a href="" class="btn">Open PDF</a>
+</div></div>
+
+
+
+
+
+
+<!-- MECH-->
+<div id="m-manual" class="section">
+<center><h2>MANUAL ANS</h2></center>
+
+<div class="card" onclick="showSection('m-sem1')">SEM 1</div>
+<div class="card" onclick="showSection('m-sem2')">SEM 2</div>
+<div class="card" onclick="showSection('m-sem3')">SEM 3</div>
+<div class="card" onclick="showSection('m-sem4')">SEM 4</div>
+<div class="card" onclick="showSection('m-sem5')">SEM 5</div>
+<div class="card" onclick="showSection('m-sem6')">SEM 6</div>
+
+</div>
+<!-- MECH SEM 1 -->
+<div id="m-sem1" class="section">
+<h2>SEM-1</h2></br>
+<h2>MECH All Subjects</h2>
+
+<div class="card" onclick="showSection('bms')">BMS</div>
+<div class="card" onclick="showSection('bch')">BCH</div>
+<div class="card" onclick="showSection('bph')">BPH</div>
+<div class="card" onclick="showSection('bco')">BCO</div>
+<div class="card" onclick="showSection('ict')">ICT</div>
+<div class="card" onclick="showSection('wpc')">WORKSHOP</div>
+
+</div>
+
+ <!--BMS  PRACTICALS -->
+<div id="bms" class="section">
+<h2>BMS Practicals</h2> 
+
+</div>
+
+ <!-- BCH PRACTICALS -->
+<div id="bch" class="section">
+<h2>BCH Practicals</h2> 
+
+</div>
+ 
+  <!-- BPH PRACTICALS -->
+<div id="bph" class="section">
+<h2>BPH Practicals</h2> 
+
+
+</div>
+ 
+ <!-- BCO PRACTICALS -->
+<div id="bco" class="section">
+<h2>BCO Practicals</h2> 
+
+</div>
+ 
+  <!-- ICT PRACTICALS -->
+<div id="ict" class="section">
+<h2>ICT Practicals</h2> 
+
+
+</div>
+ <!-- WPC PRACTICALS -->
+<div id="wpc" class="section">
+<h2>WORKSHOP Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+
+</div>
+
+
+<!-- MECH SEM 3 -->
+<div id="m-sem3" class="section">
+<h2>SEM 3</h2></br>
+<h2>MECH All Subjects</h2>
+
+
+<div class="card" onclick="showSection('fmm')">FMM</div>
+<div class="card" onclick="showSection('som')">SOM</div>
+<div class="card" onclick="showSection('cad')">CAD</div>
+<div class="card" onclick="showSection('teg')">TEG</div>
+<div class="card" onclick="showSection('pdr')">PDR</div>
+<div class="card" onclick="showSection('m-bee')">BEE</div>
+<div class="card" onclick="showSection('eic')">EIC</div>
+<div class="card" onclick="showSection('ced')">CED</div>
+<div class="card" onclick="showSection('fpp')">FPP</div>
+</div>
+
+ <!-- FMM PRACTICALS -->
+<div id="fmm" class="section">
+<h2>FMM Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+  
+   <!--SOM PRACTICALS -->
+<div id="som" class="section">
+<h2>SOM Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+  
+   <!-- CAD PRACTICALS -->
+<div id="cad" class="section">
+<h2>CAD Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+ 
+ 
+ <!-- TEG PRACTICALS -->
+<div id="teg" class="section">
+<h2>TEG Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+</div>
+
+
+
+<!-- PDR  PRACTICALS -->
+<div id="pdr" class="section">
+<h2>PDR Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+  
+   <!--BEE PRACTICALS -->
+<div id="bee" class="section">
+<h2>BEE Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+  
+   <!-- EIC PRACTICALS -->
+<div id="eic" class="section">
+<h2>EIC Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+ 
+ 
+ <!--FPP PRACTICALS -->
+<div id="fpp" class="section">
+<h2>FPP Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+</div>
+ <!-- CED PRACTICALS -->
+<div id="ced" class="section">
+<h2>CED Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+<!-- MECH SEM 4-->
+<div id="m-sem4" class="section">
+<h2>SEM 3</h2></br>
+<h2>MECH All Subjects</h2>
+
+
+<div class="card" onclick="showSection('mem')">MEM</div>
+<div class="card" onclick="showSection('tom')">TOM</div>
+<div class="card" onclick="showSection('mam')">MAM</div>
+<div class="card" onclick="showSection('ppr')">PPR</div>
+<div class="card" onclick="showSection('eds')">EDS</div>
+<div class="card" onclick="showSection('cnc')">CNC</div>
+<div class="card" onclick="showSection('ees')">EES</div>
+<div class="card" onclick="showSection('bom')">BOM</div>
+</div>
+
+ <!-- MEM PRACTICALS -->
+<div id="mem" class="section">
+<h2>MEM Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+  
+   <!--TOM PRACTICALS -->
+<div id="tom" class="section">
+<h2>TOM Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+  
+   <!-- MAM PRACTICALS -->
+<div id="mam" class="section">
+<h2>MAM Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+ 
+ 
+ <!-- PPR PRACTICALS -->
+<div id="ppr" class="section">
+<h2>PPR Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+</div>
+
+
+
+<!-- EDS  PRACTICALS -->
+<div id="eds" class="section">
+<h2>EDS Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+  
+   <!--CNC PRACTICALS -->
+<div id="cnc" class="section">
+<h2>CNS Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+  
+   <!-- EES PRACTICALS -->
+<div id="ees" class="section">
+<h2>EES Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  </div>
+ 
+ 
+ <!--BOM PRACTICALS -->
+<div id="bom" class="section">
+<h2>BOM Practicals</h2> 
+
+<div class="card">
+<h3>practical no 1</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 2</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 3</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 4</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 5</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 6</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 7</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 8</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 9</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 10</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div> 
+
+<div class="card">
+<h3>practical no 11</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 12</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 13</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 14</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 15</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 16</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 17</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 18</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+  <div class="card">
+<h3>practical no 19</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+<div class="card">
+<h3>practical no 20</h3>
+<a href= target="_blank" class="btn">Open PDF</a>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="card">
+<h5>@ PRACTICAL_HUB THANKS FOR VISITING</h5>
+</div>
+</footer>
+ <script>
+// Browser back detect ???? home section ????????????
+window.addEventListener("pageshow", function(event) {
+    // ?? user back ???? ??? ????
+    if (event.persisted || performance.navigation.type === 2) {
+        
+        // ???? sections hide ??
+        document.querySelectorAll(".section").forEach(sec => {
+            sec.style.display = "none";
+        });
+
+        // home section show ??
+        let home = document.getElementById("home");
+        if (home) {
+            home.style.display = "block";
+        }
+    }
+});
+</script>  
+
+</body>
+</html>
