@@ -258,7 +258,7 @@ function searchFunction() {
 
 
 <header>
-<h1>All MANUAL ANS OF MSBTE</h1>
+<h1>MSBTE ALL SUBJECT STUDY MATERIALS</h1>
 </header>
 <input type="text" id="search" onkeyup="searchFunction()" placeholder="Search...">
 <nav>
@@ -4921,23 +4921,58 @@ function searchFunction() {
 </div>
 </footer>
  <script>
-// Browser back detect ???? home section ????????????
-window.addEventListener("pageshow", function(event) {
-    // ?? user back ???? ??? ????
-    if (event.persisted || performance.navigation.type === 2) {
-        
-        // ???? sections hide ??
-        document.querySelectorAll(".section").forEach(sec => {
-            sec.style.display = "none";
-        });
+<script>
 
-        // home section show ??
-        let home = document.getElementById("home");
-        if (home) {
-            home.style.display = "block";
-        }
+function showSection(id) {
+    let sections = document.querySelectorAll(".section");
+    sections.forEach(sec => sec.style.display = "none");
+
+    let target = document.getElementById(id);
+    if (target) {
+        target.style.display = "block";
+        history.pushState({page: id}, "", "#" + id);
     }
-});
+}
+
+window.onpopstate = function(event) {
+    if (event.state && event.state.page) {
+        showSection(event.state.page);
+    }
+};
+
+function searchFunction() {
+    let input = document.getElementById("search").value.toLowerCase().trim();
+
+    let sections = document.querySelectorAll(".section");
+    let found = false;
+
+    sections.forEach(sec => {
+        let text = sec.innerText.toLowerCase();
+
+        if (text.includes(input) && input !== "") {
+            sec.style.display = "block";
+            found = true;
+        } else {
+            sec.style.display = "none";
+        }
+    });
+
+    if (input !== "") {
+        sections.forEach(sec => {
+            if (sec.id.toLowerCase() === input) {
+                showSection(sec.id);
+                found = true;
+            }
+        });
+    }
+
+    if (input === "") {
+        sections.forEach(sec => sec.style.display = "none");
+        document.getElementById("home").style.display = "block";
+    }
+}
+
+</script>
 </script>  
 
 </body>
