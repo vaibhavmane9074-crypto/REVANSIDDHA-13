@@ -4920,9 +4920,15 @@ function searchFunction() {
 <h5>@ PRACTICAL_HUB THANKS FOR VISITING</h5>
 </div>
 </footer>
- <script>
-<script>
+ 
+     <script>
 
+// 🔥 STEP 1: Page load होताना HOME set
+window.onload = function() {
+    history.replaceState({page: "home"}, "", "#home");
+};
+
+// 🔥 STEP 2: Section change + history save
 function showSection(id) {
     let sections = document.querySelectorAll(".section");
     sections.forEach(sec => sec.style.display = "none");
@@ -4930,41 +4936,41 @@ function showSection(id) {
     let target = document.getElementById(id);
     if (target) {
         target.style.display = "block";
+
+        // history add
         history.pushState({page: id}, "", "#" + id);
     }
 }
 
+// 🔥 STEP 3: Back button control
 window.onpopstate = function(event) {
     if (event.state && event.state.page) {
-        showSection(event.state.page);
+        let sections = document.querySelectorAll(".section");
+        sections.forEach(sec => sec.style.display = "none");
+
+        let target = document.getElementById(event.state.page);
+        if (target) target.style.display = "block";
+    } else {
+        // default home
+        showSection("home");
     }
 };
 
+// 🔥 SEARCH FUNCTION (तुझा same ठेवला)
 function searchFunction() {
     let input = document.getElementById("search").value.toLowerCase().trim();
 
     let sections = document.querySelectorAll(".section");
-    let found = false;
 
     sections.forEach(sec => {
         let text = sec.innerText.toLowerCase();
 
         if (text.includes(input) && input !== "") {
             sec.style.display = "block";
-            found = true;
         } else {
             sec.style.display = "none";
         }
     });
-
-    if (input !== "") {
-        sections.forEach(sec => {
-            if (sec.id.toLowerCase() === input) {
-                showSection(sec.id);
-                found = true;
-            }
-        });
-    }
 
     if (input === "") {
         sections.forEach(sec => sec.style.display = "none");
@@ -4973,7 +4979,7 @@ function searchFunction() {
 }
 
 </script>
-</script>  
+
 
 </body>
 </html>
